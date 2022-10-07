@@ -162,7 +162,6 @@ bool XsensMT::open(yarp::os::Searchable &config)
      }
      else if (m_portInfo.deviceId().isMtMk4() || m_portInfo.deviceId().isFmt_X000())
      {
-         yDebug() << "DEBUG: frequency= " << m_outputFrequency;
         XsOutputConfiguration euler(XDI_EulerAngles, m_outputFrequency);
         XsOutputConfiguration acc(XDI_Acceleration, m_outputFrequency);
         XsOutputConfiguration gyro(XDI_RateOfTurn, m_outputFrequency);
@@ -256,6 +255,8 @@ void XsensMT::sensorReadLoop()
     XsVector acc;
     XsVector gyro;
     XsVector mag;
+    auto initialTimeStamp = Time::now();
+    auto prevTimeStamp = Time::now();
 
     while (!m_isDeviceClosing)
     {
@@ -334,6 +335,9 @@ void XsensMT::sensorReadLoop()
         // is necessary to avoid busy waiting, but influence the latency
         // of when a measurement is available in the YARP interface
         std::this_thread::sleep_for(std::chrono::microseconds(10));
+        auto nowTimeStamp = Time::now();
+        yDebug() << "Duration= " << nowTimeStamp - prevTimeStamp;
+        prevTimeStamp = nowTimeStamp;
     }
 }
 
