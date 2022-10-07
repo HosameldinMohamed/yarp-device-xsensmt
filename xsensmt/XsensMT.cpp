@@ -330,6 +330,10 @@ void XsensMT::sensorReadLoop()
             m_bufferMutex.unlock();
             auto nowTimeStamp = Time::now();
             yDebug() << "Duration= " << nowTimeStamp - prevTimeStamp;
+            yDebug() << "Euler= " << m_sensorBuffer[0] << " " << m_sensorBuffer[1] << " " << m_sensorBuffer[2];
+            yDebug() << "accelero= " << m_sensorBuffer[3] << " " << m_sensorBuffer[4] << " " << m_sensorBuffer[3];
+            yDebug() << "gyro= " << m_sensorBuffer[6] << " " << m_sensorBuffer[7] << " " << m_sensorBuffer[8];
+            yDebug() << "magneto= " << m_sensorBuffer[9] << " " << m_sensorBuffer[10] << " " << m_sensorBuffer[11];
             prevTimeStamp = nowTimeStamp;
         }
         msgs.clear();
