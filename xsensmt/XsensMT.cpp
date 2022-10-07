@@ -255,13 +255,13 @@ void XsensMT::sensorReadLoop()
     XsVector acc;
     XsVector gyro;
     XsVector mag;
-    auto initialTimeStamp = Time::now();
     auto prevTimeStamp = Time::now();
 
     while (!m_isDeviceClosing)
     {
         m_xsensDevice.readDataToBuffer(data);
         m_xsensDevice.processBufferedData(data, msgs);
+        yDebug() << "msgs.size()= " << msgs.size();
         for (std::deque<XsMessage>::iterator it = msgs.begin(); it != msgs.end(); ++it)
         {
             // Retrieve a packet
