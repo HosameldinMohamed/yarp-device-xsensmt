@@ -162,6 +162,7 @@ bool XsensMT::open(yarp::os::Searchable &config)
      }
      else if (m_portInfo.deviceId().isMtMk4() || m_portInfo.deviceId().isFmt_X000())
      {
+         yDebug() << "DEBUG: frequency= " << m_outputFrequency;
         XsOutputConfiguration euler(XDI_EulerAngles, m_outputFrequency);
         XsOutputConfiguration acc(XDI_Acceleration, m_outputFrequency);
         XsOutputConfiguration gyro(XDI_RateOfTurn, m_outputFrequency);
