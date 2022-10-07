@@ -329,7 +329,6 @@ void XsensMT::sensorReadLoop()
             m_lastStamp.update(yarp::os::SystemClock::nowSystem());
             m_bufferMutex.unlock();
             auto nowTimeStamp = Time::now();
-            yDebug() << "TimeStamp now= " << nowTimeStamp;
             yDebug() << "Duration= " << nowTimeStamp - prevTimeStamp;
             prevTimeStamp = nowTimeStamp;
         }
