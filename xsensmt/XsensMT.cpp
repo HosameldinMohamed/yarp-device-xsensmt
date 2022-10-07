@@ -261,7 +261,6 @@ void XsensMT::sensorReadLoop()
     {
         m_xsensDevice.readDataToBuffer(data);
         m_xsensDevice.processBufferedData(data, msgs);
-        yDebug() << "msgs.size()= " << msgs.size();
         for (std::deque<XsMessage>::iterator it = msgs.begin(); it != msgs.end(); ++it)
         {
             // Retrieve a packet
