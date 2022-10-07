@@ -329,15 +329,15 @@ void XsensMT::sensorReadLoop()
             m_isSensorMeasurementAvailable = true;
             m_lastStamp.update(yarp::os::SystemClock::nowSystem());
             m_bufferMutex.unlock();
+            auto nowTimeStamp = Time::now();
+            yDebug() << "Duration= " << nowTimeStamp - prevTimeStamp;
+            prevTimeStamp = nowTimeStamp;
         }
         msgs.clear();
         // The Xsens API does not support a blocking read, so this delay
         // is necessary to avoid busy waiting, but influence the latency
         // of when a measurement is available in the YARP interface
         std::this_thread::sleep_for(std::chrono::microseconds(10));
-        auto nowTimeStamp = Time::now();
-        yDebug() << "Duration= " << nowTimeStamp - prevTimeStamp;
-        prevTimeStamp = nowTimeStamp;
     }
 }
 
